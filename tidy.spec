@@ -18,7 +18,6 @@ Source1:	http://tidy.sourceforge.net/docs/tidy_docs.tar.bz2
 Requires:	%{libname} = %{epoch}:%{version}
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 tidy is a program for tidying up messy html, for example, when we do 
