@@ -70,9 +70,13 @@ install -m 644 htmldoc/man_page.txt %{buildroot}%{_mandir}/man1/%{name}.1
 %clean
 %__rm -rf %{buildroot}
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %files
 %defattr(-,root,root)
