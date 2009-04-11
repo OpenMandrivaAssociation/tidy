@@ -17,6 +17,7 @@ License:	W3C License
 URL:		http://tidy.sourceforge.net/
 Source0:	http://tidy.sourceforge.net/src/tidy_src.tar.bz2
 Source1:	http://tidy.sourceforge.net/docs/tidy_docs.tar.bz2
+Patch0:		tidy-fi-str-fmt.patch
 Requires:	%{libname} = %{epoch}:%{version}
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -54,6 +55,7 @@ applications which will use %{name}.
 %prep
 %setup -q -n %{name}
 %setup -q -n %{name} -T -D -b1
+%patch0 -p0
 
 %build
 sh build/gnuauto/setup.sh
