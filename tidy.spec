@@ -1,6 +1,6 @@
 %define name	tidy
-%define version 20051026
-%define release %mkrel 4
+%define version 20081224
+%define release %mkrel 1
 %define epoch	1
 %define apiver	0.99
 %define major	0
@@ -15,12 +15,10 @@ Epoch:		%{epoch}
 Group:		Text tools
 License:	W3C License
 URL:		http://tidy.sourceforge.net/
-Source0:	http://tidy.sourceforge.net/src/tidy_src.tar.bz2
-Source1:	http://tidy.sourceforge.net/docs/tidy_docs.tar.bz2
-Patch0:		tidy-fi-str-fmt.patch
+Source0:	http://tidy.sourceforge.net/src/tidy_%{version}cvs.tar.gz
+Patch0:		tidy-20081224cvs-fix-format-errors.patch
 Requires:	%{libname} = %{epoch}:%{version}
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	xsltproc
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
@@ -53,21 +51,25 @@ This package contains the headers that programmers will need to develop
 applications which will use %{name}.
 
 %prep
-%setup -q -n %{name}
-%setup -q -n %{name} -T -D -b1
-%patch0 -p0
+%setup -q -n %{name}-%{version}cvs
+%patch0 -p1
 
 %build
-sh build/gnuauto/setup.sh
+#sh build/gnuauto/setup.sh
 %configure2_5x
 %make
+
+# generate man page
+console/tidy -xml-help >  htmldoc/tidy-help.xml
+console/tidy -xml-config >  htmldoc/tidy-config.xml
+xsltproc -o tidy.1 htmldoc/tidy1.xsl  htmldoc/tidy-help.xml
 
 %install
 %__rm -rf %{buildroot}
 %makeinstall
 
 install -d -m 755 %{buildroot}%{_mandir}/man1
-install -m 644 htmldoc/man_page.txt %{buildroot}%{_mandir}/man1/%{name}.1
+install -m 644 tidy.1 %{buildroot}%{_mandir}/man1/%{name}.1
 
 %clean
 %__rm -rf %{buildroot}
@@ -96,5 +98,3 @@ install -m 644 htmldoc/man_page.txt %{buildroot}%{_mandir}/man1/%{name}.1
 %{_libdir}/*.la
 %{_libdir}/*.a
 %{_libdir}/*.so
-
-
