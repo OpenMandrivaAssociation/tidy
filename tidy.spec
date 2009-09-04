@@ -1,5 +1,5 @@
 %define name	tidy
-%define version 20081224
+%define version 20090904
 %define release %mkrel 1
 %define epoch	1
 %define apiver	0.99
@@ -15,7 +15,7 @@ Epoch:		%{epoch}
 Group:		Text tools
 License:	W3C License
 URL:		http://tidy.sourceforge.net/
-Source0:	http://tidy.sourceforge.net/src/tidy_%{version}cvs.tar.gz
+Source0:	http://tidy.sourceforge.net/src/tidy-%{version}.tar.bz2
 Patch0:		tidy-20081224cvs-fix-format-errors.patch
 Requires:	%{libname} = %{epoch}:%{version}
 BuildRequires:	xsltproc
@@ -51,11 +51,11 @@ This package contains the headers that programmers will need to develop
 applications which will use %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}cvs
+%setup -q
 %patch0 -p1
 
 %build
-#sh build/gnuauto/setup.sh
+sh build/gnuauto/setup.sh
 %configure2_5x
 %make
 
