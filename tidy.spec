@@ -1,6 +1,6 @@
 %define name	tidy
 %define version 20090904
-%define release %mkrel 1
+%define release %mkrel 2
 %define epoch	1
 %define apiver	0.99
 %define major	0
