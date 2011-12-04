@@ -1,17 +1,13 @@
-%define name	tidy
-%define version 20090904
-%define release %mkrel 4
-%define epoch	1
 %define apiver	0.99
 %define major	0
 %define libname %mklibname %{name} %{apiver} %{major}
 %define develname %mklibname %name -d
 
 Summary:	Program for tidying up messy HTML
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Epoch:		%{epoch}
+Name:		tidy
+Version:	20090904
+Release:	5
+Epoch:		1
 Group:		Text tools
 License:	W3C License
 URL:		http://tidy.sourceforge.net/
@@ -19,7 +15,6 @@ Source0:	http://tidy.sourceforge.net/src/tidy-%{version}.tar.bz2
 Patch0:		tidy-20081224cvs-fix-format-errors.patch
 Requires:	%{libname} = %{epoch}:%{version}
 BuildRequires:	xsltproc
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 tidy is a program for tidying up messy html, for example, when we do 
@@ -40,7 +35,7 @@ linked with %{name}.
 %package -n	%{develname}
 Summary:	Headers for developing programs that will use %{name}
 Group:		Development/Other
-Requires:	%{libname} = %{epoch}:%{version}
+Requires:	%{libname} >= %{epoch}:%{version}
 Provides:	lib%{name}-devel = %{epoch}:%{version}
 Provides:	%{name}-devel = %{epoch}:%{version}
 Obsoletes:	%mklibname -d tidy 0
@@ -66,35 +61,23 @@ xsltproc -o tidy.1 htmldoc/tidy1.xsl  htmldoc/tidy-help.xml
 
 %install
 %__rm -rf %{buildroot}
+
 %makeinstall
 
 install -d -m 755 %{buildroot}%{_mandir}/man1
 install -m 644 tidy.1 %{buildroot}%{_mandir}/man1/%{name}.1
 
-%clean
-%__rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
+# cleanup
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %files
-%defattr(-,root,root)
 %doc htmldoc/*
 %{_bindir}/*
 %{_mandir}/man1/*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/*
-%{_libdir}/*.la
-%{_libdir}/*.a
 %{_libdir}/*.so
