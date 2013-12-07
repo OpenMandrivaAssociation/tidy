@@ -6,7 +6,7 @@
 Summary:	Program for tidying up messy HTML
 Name:		tidy
 Version:	20090904
-Release:	8
+Release:	9
 Epoch:		1
 Group:		Text tools
 License:	W3C License
