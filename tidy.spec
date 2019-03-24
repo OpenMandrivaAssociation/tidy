@@ -13,6 +13,7 @@ URL:		http://tidy.sourceforge.net/
 Source0:	https://github.com/htacg/tidy-html5/archive/%{version}/%{name}-html5-%{version}.tar.gz
 Requires:	%{libname} = %{EVRD}
 BuildRequires:	xsltproc
+BuildRequires:	cmake
 
 %description
 tidy is a program for tidying up messy html, for example, when we do 
