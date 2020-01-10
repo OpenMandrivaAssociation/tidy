@@ -43,7 +43,7 @@ applications which will use %{name}.
 
 %prep
 %setup -qn %{name}-html5-%{version}
-%apply_patches
+%autopatch -p1
 
 %build
 %cmake \
