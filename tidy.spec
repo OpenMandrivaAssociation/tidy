@@ -4,7 +4,7 @@
 
 Summary:	Program for tidying up messy HTML
 Name:		tidy
-Version:	5.7.28
+Version:	5.8.0
 Release:	1
 Epoch:		2
 Group:		Text tools
@@ -62,7 +62,7 @@ applications which will use %{name}.
 #install -d -m 755 %{buildroot}%{_mandir}/man1
 #install -m 644 tidy.1 %{buildroot}%{_mandir}/man1/%{name}.1
 
-rm -fv %{buildroot}%{_libdir}/libtidys.a
+rm -fv %{buildroot}%{_libdir}/*.a
 
 %files
 %doc README.md
