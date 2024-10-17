@@ -9,7 +9,7 @@ Release:	2
 Epoch:		2
 Group:		Text tools
 License:	W3C License
-URL:		http://tidy.sourceforge.net/
+URL:		https://tidy.sourceforge.net/
 Source0:	https://github.com/htacg/tidy-html5/archive/%{version}/%{name}-html5-%{version}.tar.gz
 Requires:	%{libname} = %{EVRD}
 BuildRequires:	xsltproc
